@@ -1,0 +1,8 @@
+<div class="flex">
+  <div [ngSwitch]="suit" class="suit-icon" [ngClass]="{ small: size === 'small', large: size === 'large' }">
+    <span class="spade" *ngSwitchCase="SUIT.SPADE"></span>
+    <span class="heart" *ngSwitchCase="SUIT.HEART"></span>
+    <span class="diamond" *ngSwitchCase="SUIT.DIAMOND"></span>
+    <span class="club" *ngSwitchCase="SUIT.CLUB"></span>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+
+.spade:before {
+    content: '\2660';
+}
+
+.heart:before {
+    content: '\2665';
+    color: red;
+}
+
+.diamond:before {
+    content: '\2666';
+    color: red;
+}
+
+.club:before {
+    content: '\2663';
+}
+
+.large {
+    font-size: 30pt;
+}

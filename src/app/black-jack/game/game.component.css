@@ -1,0 +1,22 @@
+.hand {
+    display: inherit;
+    margin-bottom: 15px;
+}
+
+.dealer-hand {
+    display: inherit;
+    margin-bottom: 100px;
+}
+
+.player-hand {
+    margin: 0 15px 0 15px;
+}
+
+.hand-value {
+    color:white;
+    text-transform: uppercase;
+}
+
+.bust {
+    color: red;
+}

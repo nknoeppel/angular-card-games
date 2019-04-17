@@ -1,0 +1,74 @@
+.card {
+    width: 80px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.back {
+    background: repeating-linear-gradient(45deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);
+}
+
+/* .dealer-card:not(.first){
+    position: relative;
+    left: -65px;
+} */
+
+.red {
+    color: red;
+}
+
+.upside-down, .face-bottom {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.face {
+    width: 60px;
+    height: 60px;
+    margin: 20px 0 20px;
+}
+
+.face-card {
+    border: 1px solid black;
+}
+
+.face-top {
+    margin: 0 0 0;
+}
+
+.face-bottom {
+    margin: 0 0 0;
+}
+
+.left {
+    margin: 5px 5px 0;
+    font-size: 14pt;
+}
+
+.right {
+    margin: 5px 5px;
+    font-size: 14pt;
+}
+
+.small-font {
+    font-size: 10pt;
+}
+
+/* .two-col .flex-col {
+    margin: 0 5px 0 5px;
+} */
+
+.placeholder-icon {
+    visibility: hidden;
+}
+
+.face-card-face {
+    font-size: 20pt;
+}

@@ -1,0 +1,20 @@
+<div class="game-select row-one">
+  <div class="flex flex-row flex-center">
+    <h1>Welcome to BlackJack</h1>
+  </div>
+  <div class="flex flex-row flex-center">
+    <img style="height: 250px; width: auto;" src="/assets/img/blackjack.png" />
+  </div>
+  <div class="flex flex-row flex-center">
+    <h3>Please select your settings to start a game</h3>
+  </div>
+  <div class="flex flex-row row-one flex-center">
+    <label class="form-label" for="numDecks">Number of decks:</label>
+    <select class="form-input" id="numDecks" [(ngModel)]="numDecks" [disabled]="true">
+      <option *ngFor="let i of [1]" [ngValue]="i">{{i}}</option>
+    </select>
+  </div>
+  <div class="flex flex-row flex-center">
+    <input type="button" class="btn" value="Let's Play!" (click)="play()" />
+  </div>
+</div>

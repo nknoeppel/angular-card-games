@@ -1,0 +1,14 @@
+<div class="game-select row-one">
+    <div class="flex flex-row flex-center">
+        <h3>Please select the game you'd like to play</h3>
+    </div>
+    <div class="flex flex-row row-one flex-center">
+        <label class="form-label" for="game">Game:</label>
+        <select class="form-input" id="game" [(ngModel)]="gameType">
+            <option *ngFor="let i of gameTypes" [ngValue]="i">{{i.name}}</option>
+        </select>
+    </div>
+    <div class="flex flex-row flex-center">
+        <input type="button" class="btn" value="Let's Play!" (click)="play()" />
+    </div>
+</div>

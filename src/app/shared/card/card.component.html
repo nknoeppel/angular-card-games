@@ -1,0 +1,298 @@
+<div class="card" [ngClass]="{ first: first, back: isHole, 'dealer-card': dealerHand }">
+  <div *ngIf="!isHole" class="flex flex-row" [ngClass]="{ red: suit === SUIT.HEART || suit === SUIT.DIAMOND }">
+    <div [ngClass]="{ 'small-font': cardNumber === 10 }" class="flex flex-col flex-start left">
+      <div class="flex flex-row flex-center card-number">
+        <ng-container *ngIf="cardNumber === 1">A</ng-container>
+        <ng-container *ngIf="cardNumber > 1 && cardNumber <= 10">{{cardNumber}}</ng-container>
+        <ng-container [ngSwitch]="cardNumber">
+          <ng-container *ngSwitchCase="11">J</ng-container>
+          <ng-container *ngSwitchCase="12">Q</ng-container>
+          <ng-container *ngSwitchCase="13">K</ng-container>
+        </ng-container>
+      </div>
+      <div class="flex flex-row flex-center card-suit-icon">
+        <app-suit-icon [suit]="suit"></app-suit-icon>
+      </div>
+    </div>
+    <div class="flex flex-col flex-center face" [ngClass]="{ 'face-card': cardNumber === 1 || cardNumber > 10 }">
+      <div class="flex flex-row flex-center" [ngClass]="{ 'two-col': cardNumber === 4 || cardNumber === 6 || cardNumber === 8 }">
+        <ng-container [ngSwitch]="cardNumber">
+          <ng-container *ngSwitchCase="1">
+            <app-suit-icon [suit]="suit" size="large"></app-suit-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <div class="flex flex-row flex-center">
+              <div class="flex flex-col flex-center">
+                <div class="flex flex-row flex-center face-top">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-row flex-center face-bottom">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="3">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="4">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-row face-top">
+                <div class="flex flex-col">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row face-bottom">
+                <div class="flex flex-col">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="5">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center face-top">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center face-bottom">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center face-top">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center face-bottom">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="6">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-row">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row upside-down">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="7">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center placeholder-icon">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="8">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-row">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row upside-down">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+              <div class="flex flex-row upside-down">
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+                <div class="flex flex-col flex-center">
+                  <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="9">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center placeholder-icon">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center placeholder-icon">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="10">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center placeholder-icon">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+              <div class="flex flex-col flex-center upside-down">
+                <app-suit-icon [suit]="suit" size="small"></app-suit-icon>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="11">
+            <div class="face-card-face">J</div>
+          </ng-container>
+          <ng-container *ngSwitchCase="12">
+            <div class="face-card-face">Q</div>
+          </ng-container>
+          <ng-container *ngSwitchCase="13">
+            <div class="face-card-face">K</div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div [ngClass]="{ 'small-font': cardNumber === 10 }" class="flex flex-col flex-start right upside-down">
+      <div class="flex flex-row flex-center card-number">
+        <ng-container *ngIf="cardNumber === 1">A</ng-container>
+        <ng-container *ngIf="cardNumber > 1 && cardNumber <= 10">{{cardNumber}}</ng-container>
+        <ng-container [ngSwitch]="cardNumber">
+          <ng-container *ngSwitchCase="11">J</ng-container>
+          <ng-container *ngSwitchCase="12">Q</ng-container>
+          <ng-container *ngSwitchCase="13">K</ng-container>
+        </ng-container>
+      </div>
+      <div class="flex flex-row flex-center card-suit-icon">
+        <app-suit-icon [suit]="suit"></app-suit-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <img src="/src/assets/img/spade.png" />
+<img src="/assets/img/spade.png" /> -->
