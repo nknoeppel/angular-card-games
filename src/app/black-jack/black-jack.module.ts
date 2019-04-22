@@ -6,11 +6,13 @@ import { CardModule } from '../shared/card/card.module';
 import { BlackJackRoutingModule } from './black-jack-routing.module';
 import { BlackJackService } from './black-jack.service';
 import { GameRouteGuard } from './game/game-route-guard.service';
+import { HandComponent } from './hand/hand.component';
 
 @NgModule({
   declarations: [
     SettingsComponent,
-    GameComponent
+    GameComponent,
+    HandComponent
   ],
   imports: [
     BlackJackRoutingModule,

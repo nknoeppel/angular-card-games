@@ -26,10 +26,6 @@ export class Deck {
     }
 
     dealCard() {
-        if (this.cards.length === 0) {
-            this.createDeck();
-            this.shuffle();
-        }
         return this.cards.splice(0, 1)[0];
     }
 }

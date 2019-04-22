@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Suit } from '../../shared/card/card.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Suit, Card } from '../../shared/card/card.model';
 import { Game } from '../models/game.model';
 import { Hand } from '../models/hand.model';
 import { BlackJackService } from '../black-jack.service';
 import { Player } from '../models/player.model';
+
+import { delay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   SUIT = Suit;
   game: Game;
@@ -21,6 +24,8 @@ export class GameComponent implements OnInit {
   currentHandIndex = 0;
   isDealerTurn = false;
   isDealerDone = false;
+
+  x: Subscription;
 
   constructor(private blackjackService: BlackJackService) { }
 
@@ -33,8 +38,20 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('num players:', this.blackjackService.settings.numPlayers);
     this.startNewGame();
+    this.x = this.blackjackService.nextCard$.pipe(
+      delay(1000)
+    ).subscribe(
+      (card: Card) => {
+        this.game.dealer.dealCard(card);
+
+        this.dealToDealer();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.x.unsubscribe();
   }
 
   startNewGame() {
@@ -44,7 +61,6 @@ export class GameComponent implements OnInit {
     this.isDealerTurn = false;
     this.isDealerDone = false;
     this.game = new Game(this.blackjackService.settings);
-    console.log(this.game);
     this.gameStarted = true;
     this.playHand();
   }
@@ -117,9 +133,16 @@ export class GameComponent implements OnInit {
   playDealerHand() {
     this.isDealerTurn = true;
     this.game.dealer.hand.cards.forEach((c) => { c.isHole = false; });
-    while (this.game.dealer.hand.handValue < 17) {
-      this.game.dealer.dealCard(this.game.deck.dealCard())
+    this.dealToDealer();
+  }
+
+  dealToDealer() {
+    if (this.game.dealer.hand.handValue < 17) {
+      this.blackjackService.dealCard(this.game.deck.dealCard());
+      console.log(this.game.deck);
     }
-    this.isDealerDone = true;
+    else {
+      this.isDealerDone = true;
+    }
   }
 }
