@@ -5,6 +5,7 @@ import { CoreModule } from '../core/core.module';
 import { CardModule } from '../shared/card/card.module';
 import { BlackJackRoutingModule } from './black-jack-routing.module';
 import { BlackJackService } from './black-jack.service';
+import { GameRouteGuard } from './game/game-route-guard.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,6 @@ import { BlackJackService } from './black-jack.service';
     CoreModule,
     CardModule
   ],
-  providers: [BlackJackService]
+  providers: [BlackJackService, GameRouteGuard]
 })
 export class BlackJackModule { }

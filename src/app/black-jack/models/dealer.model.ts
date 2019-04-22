@@ -6,7 +6,7 @@ export class Dealer {
     hand: Hand;
 
     constructor() {
-        this.hand = new Hand();
+        this.hand = new Hand({ allowResplitAces: false });
     }
 
     dealCard(card: Card) {

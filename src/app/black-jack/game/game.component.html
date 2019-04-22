@@ -1,17 +1,17 @@
 <div *ngIf="gameStarted" class="table flex flex-col flex-center">
-  <div class="flex flex-row flex-center row-one">
+  <div class="flex flex-row flex-center">
     <img style="height: 50px; width: auto;" src="/assets/img/blackjack.png" />
   </div>
   <div class="flex flex-row flex-center">
-    <div class="flex flex-col flex-center dealer-hand">
-      <div class="flex flex-row flex-center hand-value">
+    <div class="flex flex-col flex-center hand dealer-hand">
+      <div class="flex flex-row flex-center">
         <div class="flex flex-col flex-center">
           <div class="flex flex-row flex-center">
             <h2 *ngIf="!isDealerTurn">Dealer shows {{game.dealer.showing}}</h2>
             <ng-container *ngIf="isDealerTurn">
-              <h2 *ngIf="game.dealer.isBlackJack" class="hand-value">Dealer has BlackJack</h2>
-              <h2 *ngIf="game.dealer.handValue > 21" class="hand-value bust">Dealer Busts!</h2>
-              <h2 *ngIf="!game.dealer.isBlackJack && game.dealer.handValue <= 21" class="hand-value">
+              <h2 *ngIf="game.dealer.isBlackJack">Dealer has BlackJack</h2>
+              <h2 *ngIf="game.dealer.handValue > 21" class="bust">Dealer Busts!</h2>
+              <h2 *ngIf="!game.dealer.isBlackJack && game.dealer.handValue <= 21">
                 Dealer has {{game.dealer.handValue}}
               </h2>
             </ng-container>
@@ -24,34 +24,48 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isDealerDone" class="flex flex-row flex-center">
+  <div *ngIf="isDealerDone" class="flex flex-row flex-center game-options">
     <input type="button" class="btn" value="Shuffle & Deal" (click)="startNewGame()" />
     <input *ngIf="game.deck.cards.length > 26" type="button" class="btn" value="Deal Current Deck" (click)="startGame()" />
   </div>
   <div class="flex flex-row flex-center">
-    <div *ngFor="let player of game.players; let i = index" class="flex flex-col flex-center player-hand">
-      <div class="flex flex-row flex-center row-one hand-value">
+    <div *ngFor="let player of game.players; let i = index" class="flex flex-col flex-center hand player-hand">
+      <!-- <div class="flex flex-row flex-center">
         <div class="flex flex-col flex-center">
           <div class="flex flex-row flex-center">
             <h2>Player {{i+1}}</h2>
           </div>
         </div>
+      </div> -->
+      <div class="flex flex-row flex-center">
+        <div *ngFor="let hand of player.hands; let j = index" class="flex flex-col flex-center player-hand">
+          <div *ngIf="isDealerDone || hand.handValue > 21 || hand.isBlackJack" class="flex flex-row flex-center">
+            <h2 *ngIf="hand.handValue <= 21 &&
+             (hand.isBlackJack || game.dealer.handValue > 21 || hand.handValue > game.dealer.handValue); else loser">Winner!</h2>
+            <ng-template #loser>
+              <h2 class="bust">Loser</h2>
+            </ng-template>
+          </div>
+          <div class="flex flex-row flex-center">
+            <h2 *ngIf="hand.isBlackJack">BlackJack!</h2>
+            <h2 *ngIf="hand.handValue > 21" class="bust">Bust!</h2>
+            <h2 *ngIf="!hand.isBlackJack && hand.handValue <= 21">{{hand.handValue}}</h2>
+          </div>
+          <div class="flex flex-row flex-center">
+            <div class="flex flex-col flex-center">
+              <div class="flex flex-row flex-center hand">
+                <app-card *ngFor="let card of hand.cards; let j = index" [cardNumber]="card.cardNumber" [suit]="card.Suit"
+                  [dealerHand]="false" [isHole]="card.isHole" [first]="j === 0"></app-card>
+              </div>
+              <div *ngIf="currentPlayerIndex === i && currentHandIndex === j" class="flex flex-row flex-center">
+                <input type="button" class="btn" value="Hit" (click)="hit()" />
+                <input *ngIf="hand.canSplit" type="button" class="btn" value="Split" (click)="split()" />
+                <input type="button" class="btn" value="Stay" (click)="stay()" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <ng-container *ngFor="let hand of player.hands; let j = index">
-        <div class="flex flex-row flex-center">
-          <h2 *ngIf="hand.isBlackJack">BlackJack!</h2>
-          <h2 *ngIf="hand.handValue > 21" class="bust">Bust!</h2>
-          <h2 *ngIf="!hand.isBlackJack && hand.handValue <= 21">{{hand.handValue}}</h2>
-        </div>
-        <div class="flex flex-row flex-center hand">
-          <app-card *ngFor="let card of hand.cards; let j = index" [cardNumber]="card.cardNumber" [suit]="card.Suit"
-            [dealerHand]="false" [isHole]="card.isHole" [first]="j === 0"></app-card>
-        </div>
-        <div *ngIf="currentPlayer === i && currentHand === j" class="flex flex-row flex-center">
-          <input type="button" class="btn" value="Hit" (click)="hit()" />
-          <input type="button" class="btn" value="Stay" (click)="stay()" />
-        </div>
-      </ng-container>
     </div>
   </div>
 </div>

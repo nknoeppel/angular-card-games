@@ -1,10 +1,11 @@
 import { Card } from '../../shared/card/card.model';
+import { BlackJackSettings } from './game-settings.model';
 
 export class Hand {
     isSplit: boolean;
     cards: Card[];
 
-    constructor() {
+    constructor(private settings: BlackJackSettings) {
         this.cards = [];
     }
 
@@ -18,6 +19,23 @@ export class Hand {
 
     get numCards() {
         return this.cards.length;
+    }
+
+    get canSplit() {
+        if (this.cards.length === 2) {
+            if (this.cards.filter((card) => { return card.cardNumber === 13; }).length === 2) {
+                return this.settings.allowResplitAces;
+            }
+            else if (this.cards.filter((card) => { return card.value.length === 1 && card.value[0] === 10; }).length === 2) {
+                //user has 2 cards with values of 10
+                return true;
+            }
+            else {
+                //if it's a pair
+                return this.cards.filter((card) => { return card.cardNumber === this.cards[0].cardNumber; }).length === 2;
+            }
+        }
+        return false;
     }
 
     dealCard(card: Card) {

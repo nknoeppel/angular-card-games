@@ -14,6 +14,16 @@
       <option *ngFor="let i of [1]" [ngValue]="i">{{i}}</option>
     </select>
   </div>
+  <div class="flex flex-row row-one flex-center">
+    <label class="form-label" for="numPlayers">Number of players:</label>
+    <select class="form-input" id="numPlayers" [(ngModel)]="numPlayers">
+      <option *ngFor="let i of [1,2,3]" [ngValue]="i">{{i}}</option>
+    </select>
+  </div>
+  <div class="flex flex-row row-one flex-center">
+    <label class="form-label" for="canResplitAces">Allow Resplitting of Aces?</label>
+    <input type="checkbox" id="canResplitAces" [(ngModel)]="canResplitAces" />
+  </div>
   <div class="flex flex-row flex-center">
     <input type="button" class="btn" value="Let's Play!" (click)="play()" />
   </div>

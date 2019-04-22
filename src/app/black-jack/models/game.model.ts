@@ -2,6 +2,7 @@ import { Deck } from './deck';
 import { Dealer } from './dealer.model';
 import { Player } from './player.model';
 import { Hand } from './hand.model';
+import { BlackJackSettings } from './game-settings.model';
 
 export class Game {
 
@@ -9,19 +10,19 @@ export class Game {
     dealer = new Dealer();
     players: Player[] = [];
 
-    constructor(numberOfPlayers: number) {
+    constructor(private settings: BlackJackSettings) {
         this.deck.shuffle();
-        for (let i = 0; i < numberOfPlayers; i++) {
-            this.players.push(new Player());
+        for (let i = 0; i < this.settings.numPlayers; i++) {
+            this.players.push(new Player(this.settings));
         }
         this.dealHands();
     }
 
     startGameFromCurrentDeck() {
-        this.dealer.hand = new Hand();
+        this.dealer.hand = new Hand(this.settings);
         this.players.forEach((p) => {
             p.hands = [];
-            p.hands.push(new Hand());
+            p.hands.push(new Hand(this.settings));
         });
         this.dealHands();
     }
@@ -35,9 +36,5 @@ export class Game {
                 this.players[p].dealCard(0, this.deck.dealCard());
             }
         }
-
-        console.log(this.dealer);
-        console.log(this.players);
-        console.log(this.deck);
     }
 }
