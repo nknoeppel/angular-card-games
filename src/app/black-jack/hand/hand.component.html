@@ -1,10 +1,10 @@
-<!-- <div *ngIf="isDealerDone || hand.handValue > 21 || hand.isBlackJack" class="flex flex-row flex-center">
+<div *ngIf="dealerHand || hand.handValue > 21 || hand.isBlackJack" class="flex flex-row flex-center">
   <h2 *ngIf="hand.handValue <= 21 &&
-             (hand.isBlackJack || game.dealer.handValue > 21 || hand.handValue > game.dealer.handValue); else loser">Winner!</h2>
+             (hand.isBlackJack || dealerHand > 21 || hand.handValue > dealerHand); else loser">Winner!</h2>
   <ng-template #loser>
     <h2 class="bust">Loser</h2>
   </ng-template>
-</div> -->
+</div>
 <div class="flex flex-row flex-center">
   <h2 *ngIf="hand.isBlackJack">BlackJack!</h2>
   <h2 *ngIf="hand.handValue > 21" class="bust">Bust!</h2>
@@ -18,8 +18,8 @@
     </div>
     <div *ngIf="isPlaying" class="flex flex-row flex-center">
       <input type="button" class="btn" value="Hit" (click)="onHit.emit()" />
-      <input *ngIf="hand.canSplit" type="button" class="btn" value="Split" (click)="onSplit.emit()" />
-      <input type="button" class="btn" value="Stay" (click)="onStand.emit()" />
+      <input *ngIf="hand.canSplit && numPlayerHands <= 4" type="button" class="btn" value="Split" (click)="onSplit.emit()" />
+      <input type="button" class="btn" value="Stand" (click)="onStand.emit()" />
     </div>
   </div>
 </div>

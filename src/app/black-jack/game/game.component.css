@@ -1,9 +1,4 @@
-.hand {
-    display: inherit;
-    margin-bottom: 15px;
-    color:white;
-    text-transform: uppercase;
-}
+
 
 /* .dealer-hand {
     display: inherit;
@@ -12,10 +7,6 @@
 
 .player-hand {
     margin: 0 15px 0 15px;
-}
-
-.bust {
-    color: red;
 }
 
 .game-options {

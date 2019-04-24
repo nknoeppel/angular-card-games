@@ -18,16 +18,19 @@ export class GameComponent implements OnInit, OnDestroy {
   SUIT = Suit;
   game: Game;
 
-  gameStarted = false;
-
-  currentPlayerIndex = 0;
-  currentHandIndex = 0;
-  isDealerTurn = false;
-  isDealerDone = false;
-
-  x: Subscription;
-
-  constructor(private blackjackService: BlackJackService) { }
+  private _gameStarted = false;
+  get gameStarted() {
+    return this._gameStarted;
+  }
+  set gameStarted(started: boolean) {
+    if (started) {
+      this.currentPlayerIndex = 0;
+      this.currentHandIndex = 0;
+      this.isDealerTurn = false;
+      this.isDealerDone = false;
+    }
+    this._gameStarted = started;
+  }
 
   get currentHand(): Hand {
     return this.game.players[this.currentPlayerIndex].hands[this.currentHandIndex];
@@ -37,43 +40,57 @@ export class GameComponent implements OnInit, OnDestroy {
     return this.game.players[this.currentPlayerIndex];
   }
 
+  currentPlayerIndex = 0;
+  currentHandIndex = 0;
+  isDealerTurn = false;
+  isDealerDone = false;
+
+  dealerHandSubscription: Subscription;
+  gameOverSubscription: Subscription;
+  newGameSuscription: Subscription;
+
+  constructor(private blackjackService: BlackJackService) { }
+
   ngOnInit() {
-    this.startNewGame();
-    this.x = this.blackjackService.nextCard$.pipe(
+
+    this.dealerHandSubscription = this.blackjackService.nextCard$.pipe(
       delay(1000)
     ).subscribe(
       (card: Card) => {
         this.game.dealer.dealCard(card);
-
         this.dealToDealer();
       }
     );
+
+    this.gameOverSubscription = this.blackjackService.gameOver$
+      .subscribe(
+        (over: number) => {
+          this.isDealerDone = true;
+        }
+      );
+
+    this.newGameSuscription = this.blackjackService.newGameStarted$
+      .subscribe(
+        () => {
+          this.gameStarted = false;
+          this.game = new Game(this.blackjackService.settings);
+          this.gameStarted = true;
+          this.playHand();
+          console.log('new game');
+        }
+      );
+
+    this.startGame();
   }
 
   ngOnDestroy(): void {
-    this.x.unsubscribe();
-  }
-
-  startNewGame() {
-    this.gameStarted = false;
-    this.currentPlayerIndex = 0;
-    this.currentHandIndex = 0;
-    this.isDealerTurn = false;
-    this.isDealerDone = false;
-    this.game = new Game(this.blackjackService.settings);
-    this.gameStarted = true;
-    this.playHand();
+    this.dealerHandSubscription.unsubscribe();
+    this.gameOverSubscription.unsubscribe();
+    this.newGameSuscription.unsubscribe();
   }
 
   startGame() {
-    this.gameStarted = false;
-    this.currentPlayerIndex = 0;
-    this.currentHandIndex = 0;
-    this.isDealerTurn = false;
-    this.isDealerDone = false;
-    this.game.startGameFromCurrentDeck();
-    this.gameStarted = true;
-    this.playHand();
+    this.blackjackService.startNewGame();
   }
 
   currentHandNeedsUserInput() {
@@ -102,7 +119,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.playHand();
   }
 
-  stay() {
+  stand() {
     this.currentHandIndex++;
     this.playHand();
   }
@@ -139,10 +156,9 @@ export class GameComponent implements OnInit, OnDestroy {
   dealToDealer() {
     if (this.game.dealer.hand.handValue < 17) {
       this.blackjackService.dealCard(this.game.deck.dealCard());
-      console.log(this.game.deck);
     }
     else {
-      this.isDealerDone = true;
+      this.blackjackService.gameOver(this.game.dealer.handValue);
     }
   }
 }

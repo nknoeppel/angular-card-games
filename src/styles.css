@@ -42,11 +42,7 @@ div.flex-row-reverse {
 }
 
 div.row-one {
-    margin-bottom: 10px;
-}
-
-div.row-two {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 div.row-two {
@@ -144,3 +140,14 @@ footer {
     bottom:150px;
     left: -120px;
 } */
+
+.hand {
+    display: inherit;
+    margin-bottom: 15px;
+    color:white;
+    text-transform: uppercase;
+}
+
+.bust {
+    color: red;
+}
