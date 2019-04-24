@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Suit, Card } from '../../shared/card/card.model';
+import { Suit, Card } from '../../shared/models/card.model';
 import { Game } from '../models/game.model';
 import { Hand } from '../models/hand.model';
 import { BlackJackService } from '../black-jack.service';

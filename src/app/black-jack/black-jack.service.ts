@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BlackJackSettings } from './models/game-settings.model';
 import { Subject, of } from 'rxjs';
-import { Card } from '../shared/card/card.model';
+import { Card } from '../shared/models/card.model';
 
 @Injectable()
 export class BlackJackService {

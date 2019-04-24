@@ -1,4 +1,4 @@
-import { Deck } from './deck';
+import { Deck } from '../../shared/models/deck';
 import { Dealer } from './dealer.model';
 import { Player } from './player.model';
 import { Hand } from './hand.model';
@@ -6,11 +6,12 @@ import { BlackJackSettings } from './game-settings.model';
 
 export class Game {
 
-    deck = new Deck();
+    deck: Deck;
     dealer = new Dealer();
     players: Player[] = [];
 
     constructor(private settings: BlackJackSettings) {
+        this.deck = new Deck(settings.numDecks);
         this.deck.shuffle();
         for (let i = 0; i < this.settings.numPlayers; i++) {
             this.players.push(new Player(this.settings));

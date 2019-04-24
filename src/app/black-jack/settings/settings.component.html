@@ -10,8 +10,8 @@
   </div>
   <div class="flex flex-row row-one flex-center">
     <label class="form-label" for="numDecks">Number of decks:</label>
-    <select class="form-input" id="numDecks" [(ngModel)]="numDecks" [disabled]="true">
-      <option *ngFor="let i of [1]" [ngValue]="i">{{i}}</option>
+    <select class="form-input" id="numDecks" [(ngModel)]="numDecks">
+      <option *ngFor="let i of [1,2,3,4,5,6,7,8]" [ngValue]="i">{{i}}</option>
     </select>
   </div>
   <div class="flex flex-row row-one flex-center">

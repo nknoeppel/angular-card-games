@@ -1,4 +1,4 @@
-import { Card } from '../../shared/card/card.model';
+import { Card } from '../../shared/models/card.model';
 import { Hand } from './hand.model';
 
 export class Dealer {

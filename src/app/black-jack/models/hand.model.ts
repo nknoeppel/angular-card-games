@@ -1,4 +1,4 @@
-import { Card } from '../../shared/card/card.model';
+import { Card } from '../../shared/models/card.model';
 import { BlackJackSettings } from './game-settings.model';
 
 export class Hand {
